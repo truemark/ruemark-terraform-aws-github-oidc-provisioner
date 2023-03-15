@@ -1,17 +1,17 @@
 output "role_name" {
-  value = module.bitbucket_service_provisioner.iam_role_name
+  value = module.github_provisioner.name
 }
 
 output "role_arn" {
-  value = module.bitbucket_service_provisioner.iam_role_arn
+  value = module.github_provisioner.arn
 }
 
 output "role_id" {
-  value = module.bitbucket_service_provisioner.iam_role_unique_id
+  value = module.github_provisioner.unique_id
 }
 
 output "role_path" {
-  value = module.bitbucket_service_provisioner.iam_role_path
+  value = module.github_provisioner.path
 }
 
 output "terraform_policy_name" {

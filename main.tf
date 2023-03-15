@@ -5,18 +5,15 @@ data "aws_caller_identity" "current" {}
 #------------------------------------------------------------------------------
 
 module "github_provisioner" {
-  count = var.create_role ? 1 : 0
   source = "terraform-aws-modules/iam/aws//modules/iam-github-oidc-role"
   version = "5.11.2"
 
-  create = var.create
   name = var.name
   tags = merge({
     Role = var.name
   }, var.tags)
-  provider_url = var.provider_url
   policies = var.role_policy_arns
-  subjects = local.subjects
+  subjects = var.subjects
   path = var.path
   
 }
@@ -79,7 +76,7 @@ resource "aws_iam_policy" "terraform" {
 resource "aws_iam_role_policy_attachment" "terraform" {
   count = var.create_role && var.create_terraform_policy ? 1 : 0
   policy_arn = aws_iam_policy.terraform[count.index].arn
-  role = module.github_provisioner.iam_role_name
+  role = module.github_provisioner.name
 }
 
 #------------------------------------------------------------------------------
@@ -96,5 +93,5 @@ resource "aws_iam_policy" "provisioner_n" {
 resource "aws_iam_role_policy_attachment" "provisioner_n" {
   count = length(var.policies)
   policy_arn = aws_iam_policy.provisioner_n[count.index].arn
-  role = module.github_provisioner.iam_role_name
+  role = module.github_provisioner.name
 }
