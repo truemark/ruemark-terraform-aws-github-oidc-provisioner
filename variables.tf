@@ -79,3 +79,8 @@ variable "allow_self_assume_role" {
   default     = true
   type        = bool
 }
+
+variable "max_session_duration" {
+  description = "Maximum session duration in seconds between 3600 and 43200"
+  default     = 22200 # 6 hours 10 minutes. 6 hours is the maximum session duration for a GitHub action
+}

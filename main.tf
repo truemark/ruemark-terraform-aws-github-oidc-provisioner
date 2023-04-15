@@ -12,10 +12,10 @@ module "github_provisioner" {
   tags = merge({
     Role = var.name
   }, var.tags)
-  policies = var.role_policy_arns
-  subjects = var.subjects
-  path     = var.path
-
+  policies             = var.role_policy_arns
+  subjects             = var.subjects
+  path                 = var.path
+  max_session_duration = var.max_session_duration
 }
 
 #------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ resource "aws_iam_role_policy_attachment" "terraform" {
 }
 
 #------------------------------------------------------------------------------
-# Additional Policies 
+# Additional Policies
 #------------------------------------------------------------------------------
 resource "aws_iam_policy" "provisioner_n" {
   count       = length(var.policies)
