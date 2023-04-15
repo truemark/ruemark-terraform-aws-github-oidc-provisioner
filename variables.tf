@@ -1,18 +1,18 @@
 variable "create_role" {
   description = "Whether to create role"
-  type = bool
-  default = true
+  type        = bool
+  default     = true
 }
 
 variable "name" {
   description = "Name to use on resources"
-  type = string
+  type        = string
 }
 
 variable "path" {
   description = "Path to use on resources"
-  default = "/"
-  type = string
+  default     = "/"
+  type        = string
 }
 
 variable "tags" {
@@ -23,59 +23,59 @@ variable "tags" {
 
 variable "provider_url" {
   description = "The URL of the identity provider. Corresponds to the iss claim. Use this for GitHub"
-  type = list(string)
+  type        = list(string)
 }
 
 variable "role_policy_arns" {
   description = "List of ARNs of IAM policies to attach to IAM role"
-  type = map(string)
-  default = {}
+  type        = map(string)
+  default     = {}
 }
 
 variable "subjects" {
   description = "List of GitHub repositories allowed to use this role. You do not need to prefix with `repo:` as this is provided."
-  type = list(string)
-  default = []
+  type        = list(string)
+  default     = []
 }
 
 variable "create_terraform_policy" {
   description = "Whether to create the policy for terraform access to S3 and Dynamo"
-  type = bool
-  default = true
+  type        = bool
+  default     = true
 }
 
 variable "terraform_s3_bucket" {
   description = "Name of the terraform bucket holding terraform state information. Defaults to <account>-terraform."
-  default = null
-  type = string
+  default     = null
+  type        = string
 }
 
 variable "terraform_s3_prefix" {
   description = "Optional path prefix inside the terraform S3 bucket to grant access to."
-  default = "*"
-  type = string
+  default     = "*"
+  type        = string
 }
 
 variable "terraform_dynamodb_table" {
   description = "Name of the DynamoDB table holding terraform locks. Defaults to <account>-terraform."
-  default = null
-  type = string
+  default     = null
+  type        = string
 }
 
 variable "terraform_policy_tags" {
   description = "Tags to add to the terraform policy"
-  type = map(string)
-  default = {}
+  type        = map(string)
+  default     = {}
 }
 
 variable "policies" {
   description = "Policies to create and apply to the IAM user."
-  default = []
-  type = list(string)
+  default     = []
+  type        = list(string)
 }
 
 variable "allow_self_assume_role" {
   description = "Allow the role to assume itself"
-  default = true
-  type = bool
+  default     = true
+  type        = bool
 }
