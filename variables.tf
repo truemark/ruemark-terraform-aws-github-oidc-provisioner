@@ -45,7 +45,7 @@ variable "create_terraform_policy" {
 }
 
 variable "terraform_s3_bucket" {
-  description = "Name of the terraform bucket holding terraform state information. Defaults to <account>-terraform."
+  description = "Name of the terraform bucket holding terraform state information. Defaults to <account>-terraform-<region>."
   default     = null
   type        = string
 }

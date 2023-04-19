@@ -1,4 +1,5 @@
 data "aws_caller_identity" "current" {}
+data "aws_region" "current" {}
 
 #------------------------------------------------------------------------------
 # OIDC Assumable Role - Github
@@ -27,8 +28,8 @@ module "github_provisioner" {
 # is sensitive information stored in the state files in these S3 buckets which should be restricted.
 
 locals {
-  terraform_s3_bucket      = var.terraform_s3_bucket == null ? "${data.aws_caller_identity.current.account_id}-terraform" : var.terraform_s3_bucket
-  terraform_dynamodb_table = var.terraform_dynamodb_table == null ? "${data.aws_caller_identity.current.account_id}-terraform" : var.terraform_dynamodb_table
+  terraform_s3_bucket      = var.terraform_s3_bucket == null ? "${data.aws_caller_identity.current.account_id}-terraform-${data.aws_region.current.name}" : var.terraform_s3_bucket
+  terraform_dynamodb_table = var.terraform_dynamodb_table == null ? "${data.aws_caller_identity.current.account_id}-terraform-${data.aws_region.current.name}" : var.terraform_dynamodb_table
 }
 
 data "aws_iam_policy_document" "terraform" {
